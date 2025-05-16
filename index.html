@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <title>
+        7 Wonders
+    </title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: gainsboro;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: goldenrod;
+            background-image: url("diagmonds-light.png");
+        }
+        
+        #scoresheet {
+            height: 80vh;
+            width: 50vw;
+            background-color: rgb(255, 255, 255);
+            border-radius: 3%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            overflow: scroll;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        
+        #topBanner {
+            background-color: goldenrod;
+            margin: 0px;
+            height: 10%;
+            color: whitesmoke;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: "Raleway", serif;
+            font-size: 2.5em;
+            width: 100%;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        }
+        @media screen and (max-width: 1800px) {
+            #scoresheet {
+                width: 90vw; /* The width is 100%, when the viewport is 800px or smaller */
+                height: 95vh;
+            }
+            .category
+            {
+                font-size: 25px;
+            }
+            #topBanner
+            {
+                font-size: 25px;
+            }
+            td:nth-child(odd)
+            {
+                width: 35%;
+                padding-right: 10px;
+            }
+            td:nth-child(even)
+            {
+                width: 50%;
+            }
+        }
+
+        @media screen and (max-width: 1300px) {
+            #scoresheet {
+                width: 70vw; /* The width is 100%, when the viewport is 800px or smaller */
+                height: 95vh;
+            }
+        }
+        .category
+        {
+            font-family: "Raleway", serif;
+        }
+        td 
+        {
+        }
+        td:nth-child(odd)
+        {
+            width: 45%;
+            text-align: right;
+            padding-right: 20px;
+        }
+        td:nth-child(even)
+        {
+            text-align: left;
+            padding-left: 20px;
+        }
+        input{
+            border: none;
+            border-radius: 4px;
+            height: 100%;
+            font-size: 25px;
+            width: 45%;
+            text-align: center;
+            padding: 3px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
+        }
+        .science
+        {
+            width: 15%;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+        }
+
+        /* Firefox */
+        input[type=number] {
+        -moz-appearance: textfield;
+        }
+    </style>
+</head>
+
+
+<script>
+    function resetForm()
+    {
+        var tObj = document.querySelectorAll('.science, .pointInput');
+        for(var i = 0; i < tObj.length; i++){
+            tObj[i].value='0';
+        }
+    }
+
+    function calculate()
+    {
+        var milPts = Number(document.getElementById("military").value);
+        var coins = Number(document.getElementById("coins").value);
+        var wonder = Number(document.getElementById("wonder").value);
+        var civ = Number(document.getElementById("Civilian").value);
+        var s1 = Number(document.getElementById("science1").value);
+        var s2 = Number(document.getElementById("science2").value);
+        var s3 = Number(document.getElementById("science3").value);
+        var commerce = Number(document.getElementById("commerce").value);
+        var guild = Number(document.getElementById("guild").value);
+        var science = (Math.min(s1, s2, s3) * 7) + (s1 * s1) + (s2 * s2) + (s3 * s3); 
+        var total = milPts + Math.floor(coins / 3) + wonder + civ + science + commerce + guild;
+        document.getElementById("total").value = total;
+    }
+</script>
+    <body>
+        <div id = "scoresheet">
+            <h1 id = "topBanner">
+                7 Wonders Scoresheet
+            </h1>
+            <table>
+                <tr>
+                    <td><h1 class = "category" style="color: firebrick;">Military Points: </h1></td>
+                    <td><input type="number" class="pointInput" id="military" placeholder="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td><h1 class = "category" style="color: gray;">Coins Left: </h1></td>
+                    <td><input type="number" class="pointInput" id="coins" placeholder="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td><h1 class = "category" style="color: goldenrod;">Wonder: </h1></td>
+                    <td><input type="number" class="pointInput" id="wonder" placeholder="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td><h1 class = "category" style="color: mediumblue;">Civilian: </h1></td>
+                    <td><input type="number" class="pointInput" id="Civilian" placeholder="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td><h1 class = "category" style="color: green;">Science: </h1></td>
+                    <td><input class = "science" class="pointInput" type="number" id="science1" placeholder="0" onchange="calculate()">
+                        <input class = "science" class="pointInput" type="number" id="science2" placeholder="0" onchange="calculate()">
+                        <input class = "science" class="pointInput" type="number" id="science3" placeholder="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td><h1 class = "category" style="color: goldenrod;">Commerce: </h1></td>
+                    <td><input type="number" class="pointInput" id="commerce" placeholder="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td><h1 class = "category" style="color: purple;">Guild: </h1></td>
+                    <td><input type="number" class="pointInput" id="guild" placeholder="0" onchange="calculate()"></td>
+                </tr>
+                <tr>
+                    <td><h1 class = "category">Total: </h1></td>
+                    <td><input type="number" class="pointInput" id="total" placeholder="0" disabled style="color: black; background-color: white;">
+                        <input type="button" value="⟳" style="width: fit-content; padding: 3px 6px; margin-left: 20px;" onclick="resetForm()">
+                    </td>
+                </tr>
+            </table>
+
+        </div>
+    </body>
+</html>
