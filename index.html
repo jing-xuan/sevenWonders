@@ -48,6 +48,11 @@
             width: 100%;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         }
+
+        .science
+        {
+            width: 15%;
+        }
         @media screen and (max-width: 800px) {
             #scoresheet {
                 width: 90vw; /* The width is 100%, when the viewport is 800px or smaller */
@@ -65,10 +70,15 @@
             {
                 width: 35%;
                 padding-right: 10px;
+                padding-left: 10px;
             }
             td:nth-child(even)
             {
                 width: 50%;
+            }
+            .science
+            {
+                width: 25%;
             }
         }
 
@@ -105,10 +115,6 @@
             text-align: center;
             padding: 3px;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2) inset;
-        }
-        .science
-        {
-            width: 15%;
         }
         input::-webkit-outer-spin-button,
         input::-webkit-inner-spin-button {
